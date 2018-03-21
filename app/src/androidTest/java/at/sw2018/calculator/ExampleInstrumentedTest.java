@@ -11,6 +11,9 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
@@ -41,10 +44,33 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    public void testInputField() {
+        for (int i = 9; i >= 0; i--)
+        {
+            onView(withText(Integer.toString(i))).perform(click());
+        }
+        onView(withText("9876543210")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testClearButton() {
+        onView(withText("3")).perform(click());
+        onView(withText("C")).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("0")));
+    }
+
+    @Test
+    public void testDoAddition(){
+        int result = Calculations.doAddition(2,3);
+        assertEquals(5,result);
+    }
+
+    @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("at.sw2018.calculator", appContext.getPackageName());
     }
+
 }
