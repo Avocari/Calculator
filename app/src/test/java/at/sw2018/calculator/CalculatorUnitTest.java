@@ -9,6 +9,13 @@ import static junit.framework.Assert.assertEquals;
  */
 
 public class CalculatorUnitTest {
+
+    @Test
+    public void testValueOf(){
+        Integer i = 6;
+        
+    }
+
     @Test
     public void testDoAddition(){
         int result = Calculations.doAddition(2, 3);
